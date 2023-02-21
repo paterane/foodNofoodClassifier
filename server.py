@@ -18,7 +18,7 @@ image_file = st.file_uploader(":green[Upload Image file here]",
 col1, col2 = st.columns(2) 
 if image_file != None:
     with col1:
-        st.image(image_file)
+        st.image(Image.open(image_file, 'r').resize((180,180)))
     img_data = Classifier.getImageData(image_file)
     prediction = Classifier.IsFood(img_data)
     with col2:

@@ -10,8 +10,12 @@ class Classifier:
         '''
         Return: np.array of image data
         '''
-        im = Image.open(image, 'r').resize((180,180))
-        im_data = np.array(im.getdata()).reshape((1,180,180,3))
+        im = Image.open(image, 'r')
+        if ''.join(im.getbands()) != 'RGB':
+            im = im.convert('RGB').resize((180,180))
+        else:
+            im = im.resize((180,180))
+        im_data = np.array(im.getdata()).reshape(1,180,180,3)
         return im_data
     def showImage(image):
         '''
